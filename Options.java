@@ -1,6 +1,5 @@
 public interface Options {
-    public void open();
-    public void save();
-    public void delete();
+    public void execute();
 
+    void add(Options option);
 }
