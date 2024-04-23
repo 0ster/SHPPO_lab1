@@ -1,6 +1,10 @@
 public class ContextMenu {
     private MenuState state;
 
+    public ContextMenu() {
+        this.state = new CollapsedState();
+    }
+
     public void setState(MenuState state) {
         this.state = state;
     }
@@ -9,7 +13,7 @@ public class ContextMenu {
         return state;
     }
 
-    public void handle(){
+    public void handle() {
         state.handle(this);
     }
 
