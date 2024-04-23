@@ -1,3 +1,4 @@
 public interface MenuState {
-    void handleContextMenu();
+    void handle(ContextMenu contextMenu);
+    void clickMenuItem(MenuItemAction menuItem);
 }

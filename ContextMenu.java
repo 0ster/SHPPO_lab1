@@ -1,25 +1,19 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class ContextMenu {
-    private List<Options> option = new ArrayList<>();
-    private MenuState currentState;
-
-    public ContextMenu(MenuState currentState) {
-        this.currentState = currentState;
-    }
+    private MenuState state;
 
     public void setState(MenuState state) {
-        this.currentState = currentState;
-    }
-    public void show(){
-        currentState.handleContextMenu();
-    }
-    public void addOption(Options option){
-        option.add(option);
+        this.state = state;
     }
 
-    public List<Options> getOptions() {
-        return option;
+    public MenuState getState() {
+        return state;
+    }
+
+    public void handle(){
+        state.handle(this);
+    }
+
+    public void clickMenuItem(MenuItemAction menuItem){
+        state.clickMenuItem(menuItem);
     }
 }
