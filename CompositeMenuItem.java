@@ -1,3 +1,5 @@
+import SubMenu.MenuItemAction;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,4 +17,13 @@ public class CompositeMenuItem implements MenuItemAction {
             menuItem.execute();
         }
     }
+
+    public List<MenuItemAction> getMenuItems() {
+        return menuItems;
+    }
+
+    public void setMenuItems(List<MenuItemAction> menuItems) {
+        this.menuItems = menuItems;
+    }
+
 }

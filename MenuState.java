@@ -1,4 +1,6 @@
+import SubMenu.MenuItemAction;
+
 public interface MenuState {
-    void handle(ContextMenu contextMenu);
+    void handle();
     void clickMenuItem(MenuItemAction menuItem);
 }
