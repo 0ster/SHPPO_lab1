@@ -1,6 +1,8 @@
 public class SaveFactory extends MenuFactory{
     @Override
     public MenuItemAction createMenuItem() {
-        return new SaveItemAction();
+        CompositeMenuItem saveMenu = new CompositeMenuItem();
+        saveMenu.addMenuItem(new SaveItemAction());
+        return saveMenu;
     }
 }

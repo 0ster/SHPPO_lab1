@@ -1,6 +1,20 @@
 public class DeleteItemAction implements MenuItemAction {
+    private DeleteStrategy deleteStrategy;
+
+    public void setDeleteStrategy(DeleteStrategy deleteStrategy) {
+        this.deleteStrategy = deleteStrategy;
+    }
+
     @Override
     public void execute() {
-        System.out.println("Выполняется удаление...");
+        if (deleteStrategy != null) {
+            deleteStrategy.execute();
+        } else {
+            System.out.println("Не установлена стратегия удаления.");
+        }
     }
+    public void delete() {
+        execute();
+    }
+
 }

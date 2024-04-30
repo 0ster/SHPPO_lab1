@@ -5,11 +5,18 @@ public class Main {
         MenuFactory openFactory = new OpenFactory();
         MenuItemAction openItem = openFactory.createMenuItem();
 
-        MenuFactory saveFactory = new SaveFactory();
-        MenuItemAction saveItem = saveFactory.createMenuItem();
 
-        MenuFactory deleteFactory = new DeleteFactory();
-        MenuItemAction deleteItem = deleteFactory.createMenuItem();
+        SaveItemAction saveAction = new SaveItemAction();
+        saveAction.setSaveStrategy(new SaveAsStrategy());
+        saveAction.execute();
+        saveAction.setSaveStrategy(new SaveAllStrategy());
+        saveAction.execute();
+
+        DeleteItemAction deleteAction = new DeleteItemAction();
+        deleteAction.setDeleteStrategy(new DeleteLastChangeStrategy());
+        deleteAction.delete();
+        deleteAction.setDeleteStrategy(new DeleteAllStrategy());
+        deleteAction.delete();
 
         ContextMenu contextMenu = new ContextMenu();
         contextMenu.handle();

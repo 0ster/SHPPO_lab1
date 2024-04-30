@@ -9,10 +9,6 @@ public class ContextMenu {
         this.state = state;
     }
 
-    public MenuState getState() {
-        return state;
-    }
-
     public void handle() {
         state.handle(this);
     }
@@ -20,4 +16,6 @@ public class ContextMenu {
     public void clickMenuItem(MenuItemAction menuItem){
         state.clickMenuItem(menuItem);
     }
+
+
 }
