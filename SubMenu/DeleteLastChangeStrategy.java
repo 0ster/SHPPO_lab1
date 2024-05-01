@@ -4,6 +4,14 @@ public class DeleteLastChangeStrategy implements DeleteItemAction1 {
 
     private String Name;
 
+    public DeleteLastChangeStrategy() {
+        Name = " ";
+    }
+
+    public DeleteLastChangeStrategy(String name) {
+        Name = name;
+    }
+
     public void setName(String name) {
         Name = name;
     }

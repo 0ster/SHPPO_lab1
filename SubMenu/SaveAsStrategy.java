@@ -4,6 +4,10 @@ public class SaveAsStrategy implements SaveItemAction1 {
 
     private String Name;
 
+    public SaveAsStrategy() {
+        Name = " ";
+    }
+
     public SaveAsStrategy(String name) {
         this.Name = name;
     }

@@ -4,6 +4,14 @@ public class OpenStrategy implements OpenItemAction1 {
 
     private String Name;
 
+    public OpenStrategy() {
+        Name = " ";
+    }
+
+    public OpenStrategy(String name) {
+        Name = name;
+    }
+
     public void setName(String name) {
         Name = name;
     }
@@ -12,9 +20,10 @@ public class OpenStrategy implements OpenItemAction1 {
         return Name;
     }
 
+
     @Override
     public void open() {
-        System.out.println("Выполняется сохранение всего...");
+        System.out.println("Выполняется открытие...");
     }
 
     @Override

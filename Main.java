@@ -1,3 +1,7 @@
+import Factory.DeleteFactory;
+import Factory.MenuFactory;
+import Factory.OpenFactory;
+import Factory.SaveFactory;
 import SubMenu.*;
 
 import java.util.Scanner;
@@ -31,18 +35,20 @@ public class Main {
                 contextMenu.clickMenuItem(saveItem);
                 contextMenu.clickMenuItem(deleteItem);
 
-                SaveItemAction saveAction = new SaveItemAction();
-                saveAction.setSaveStrategy(new SaveAsStrategy());
-                saveAction.execute();
-                saveAction.setSaveStrategy(new SaveAllStrategy());
-                saveAction.execute();
 
 
-                DeleteItemAction deleteAction = new DeleteItemAction();
-                deleteAction.setDeleteStrategy(new DeleteLastChangeStrategy());
-                deleteAction.delete();
-                deleteAction.setDeleteStrategy(new DeleteAllStrategy());
-                deleteAction.delete();
+//                SaveItemAction saveAction = new SaveItemAction();
+//                saveAction.setSaveStrategy(new SaveAsStrategy());
+//                saveAction.execute();
+//                saveAction.setSaveStrategy(new SaveAllStrategy());
+//                saveAction.execute();
+//
+//
+//                DeleteItemAction deleteAction = new DeleteItemAction();
+//                deleteAction.setDeleteStrategy(new DeleteLastChangeStrategy());
+//                deleteAction.delete();
+//                deleteAction.setDeleteStrategy(new DeleteAllStrategy());
+//                deleteAction.delete();
                 break;
             case 2:
                 contextMenu.setState(new CollapsedState());
