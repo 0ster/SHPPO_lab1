@@ -17,7 +17,7 @@ public class ContextMenu {
         return state;
     }
 
-    public void handle() {state.handle();}
+    public void handle() {state.stateHandle();}
 
     public void clickMenuItem(MenuItemAction menuItem){
         state.clickMenuItem(menuItem);

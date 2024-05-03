@@ -1,17 +1,23 @@
 package Factory;
 
-import SubMenu.DeleteAllStrategy;
-import SubMenu.DeleteLastChangeStrategy;
-import SubMenu.MenuItemAction;
-import SubMenu.DeleteItemAction1;
+import SubMenu.*;
 
 public class DeleteFactory extends MenuFactory {
     @Override
     public MenuItemAction createMenuItem() {
-        CompositeMenuItem deleteMenu = new CompositeMenuItem();
-        deleteMenu.addMenuItem(new DeleteLastChangeStrategy("Удалить последнее"));
-        deleteMenu.addMenuItem(new DeleteAllStrategy("Удалить все"));
-        return deleteMenu;
+        DeleteAllStrategy deleteAllStrategy = new DeleteAllStrategy();
+        DeleteLastChangeStrategy deleteLastChangeStrategy = new DeleteLastChangeStrategy();
+        deleteAllStrategy.setName("Удалить все");
+        deleteLastChangeStrategy.setName("Удалить последние изменения");
+        String name1 = deleteAllStrategy.getName();
+        System.out.println(name1);
+        String name2 = deleteLastChangeStrategy.getName();
+        System.out.println(name2);
+
+        CompositeMenuItem saveMenu = new CompositeMenuItem();
+        saveMenu.addMenuItem(deleteAllStrategy);
+        saveMenu.addMenuItem(deleteLastChangeStrategy);
+        return saveMenu;
     }
 
 }

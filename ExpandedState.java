@@ -3,7 +3,7 @@ import SubMenu.MenuItemAction;
 public class ExpandedState implements MenuState{
 
     @Override
-    public void handle() {
+    public void stateHandle() {
         System.out.println("Меню развернуто: ");
     }
 

@@ -1,6 +1,6 @@
 import SubMenu.MenuItemAction;
 
 public interface MenuState {
-    void handle();
+    void stateHandle();
     void clickMenuItem(MenuItemAction menuItem);
 }

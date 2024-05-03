@@ -3,7 +3,7 @@ import SubMenu.MenuItemAction;
 public class CollapsedState implements MenuState{
 
     @Override
-    public void handle() {
+    public void stateHandle() {
         System.out.println("Меню свёрнуто: ");
     }
 

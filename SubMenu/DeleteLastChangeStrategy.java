@@ -22,7 +22,7 @@ public class DeleteLastChangeStrategy implements DeleteItemAction1 {
 
     @Override
     public void delete() {
-        System.out.println("Выполняется удаление последнего выбора...");
+        System.out.println("Выполняется удаление последнего изменения...");
     }
 
     @Override
