@@ -7,15 +7,12 @@ public class OpenStrategy implements OpenItemAction1 {
     public OpenStrategy() {
         Name = " ";
     }
-
     public OpenStrategy(String name) {
         Name = name;
     }
-
     public void setName(String name) {
         Name = name;
     }
-
     public String getName() {
         return Name;
     }

@@ -1,4 +1,5 @@
 import SubMenu.MenuItemAction;
+import java.util.List;
 
 public class ContextMenu {
     private MenuState state;
@@ -19,9 +20,10 @@ public class ContextMenu {
 
     public void handle() {state.stateHandle();}
 
-    public void clickMenuItem(MenuItemAction menuItem){
-        state.clickMenuItem(menuItem);
+    public void clickMenuItem(List<MenuItemAction> menuItems) {
+        for (MenuItemAction menuItem : menuItems) {
+            state.clickMenuItem(menuItem);
+        }
     }
 
-
-} // Полностью переписать это (пиздец))))))
+} // Полностью переписать это (пи)

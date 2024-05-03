@@ -2,18 +2,17 @@ package Factory;
 
 import SubMenu.*;
 
-import javax.xml.namespace.QName;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OpenFactory extends MenuFactory {
     @Override
-    public MenuItemAction createMenuItem() {
+    public List<MenuItemAction> createMenuItem() {
+        List<MenuItemAction> menuItemActions = new ArrayList<>();
         OpenStrategy openStrategy = new OpenStrategy();
         openStrategy.setName("Открыть");
-        String name = openStrategy.getName();
-        System.out.println(name);
+        menuItemActions.add(openStrategy);
 
-        CompositeMenuItem openMenu = new CompositeMenuItem();
-        openMenu.addMenuItem(openStrategy);
-        return openMenu;
+        return menuItemActions;
     }
 }

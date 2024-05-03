@@ -1,9 +1,8 @@
-import Factory.DeleteFactory;
-import Factory.MenuFactory;
-import Factory.OpenFactory;
-import Factory.SaveFactory;
+import CoR.*;
+import Factory.*;
 import SubMenu.*;
 
+import java.util.List;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
@@ -27,28 +26,52 @@ public class Main {
                 MenuFactory saveFactory = new SaveFactory();
                 MenuFactory deleteFactory = new DeleteFactory();
 
-                MenuItemAction openItem = openFactory.createMenuItem();
-                MenuItemAction saveItem = saveFactory.createMenuItem();
-                MenuItemAction deleteItem = deleteFactory.createMenuItem();
+                List<MenuItemAction> openItems = openFactory.createMenuItem();
+                List<MenuItemAction> saveItems = saveFactory.createMenuItem();
+                List<MenuItemAction> deleteItems = deleteFactory.createMenuItem();
 
-                contextMenu.clickMenuItem(openItem);
-                contextMenu.clickMenuItem(saveItem);
-                contextMenu.clickMenuItem(deleteItem);
+                CommandHandler openHandler = new OpenCommandHandler();
+                CommandHandler saveHandler = new SaveCommandHandler();
+                CommandHandler deleteHandler = new DeleteCommandHandler();
+                CommandHandler saveAs = new SaveAsCommandHandler();
+                CommandHandler saveAll = new SaveAllCommandHandler();
+                CommandHandler deleteLastChange = new DeleteLastChangeCommandHandler();
+                CommandHandler deleteAll = new DeleteAllCommandHandler();
+
+                openHandler.setNext(saveHandler);
+                saveHandler.setNext(deleteHandler);
+                deleteHandler.setNext(saveAs);
+                saveAs.setNext(saveAll);
+                saveAll.setNext(deleteLastChange);
+                deleteLastChange.setNext(deleteAll);
+                openHandler.setNext(saveHandler);
 
 
+                // Создание элементов компоновщика
+                MenuItemAction openMenuItem = new MenuItem(openHandler);
+                MenuItemAction saveMenuItem = new MenuItem(saveHandler);
+                MenuItemAction deleteMenuItem = new MenuItem(deleteHandler);
+                MenuItemAction saveAsMenuItem = new MenuItem(saveAs);
+                MenuItemAction saveAllMenuItem = new MenuItem(saveAll);
+                MenuItemAction deleteLastChangeMenuItem = new MenuItem(deleteLastChange);
+                MenuItemAction deleteAllMenuItem = new MenuItem(deleteAll);
 
-//                SaveItemAction saveAction = new SaveItemAction();
-//                saveAction.setSaveStrategy(new SaveAsStrategy());
-//                saveAction.execute();
-//                saveAction.setSaveStrategy(new SaveAllStrategy());
-//                saveAction.execute();
-//
-//
-//                DeleteItemAction deleteAction = new DeleteItemAction();
-//                deleteAction.setDeleteStrategy(new DeleteLastChangeStrategy());
-//                deleteAction.delete();
-//                deleteAction.setDeleteStrategy(new DeleteAllStrategy());
-//                deleteAction.delete();
+                contextMenu.clickMenuItem(openItems);
+                contextMenu.clickMenuItem(saveItems);
+                contextMenu.clickMenuItem(deleteItems);
+
+                CompositeMenuItem all = new CompositeMenuItem();
+                all.addMenuItem(openMenuItem);
+                all.addMenuItem(saveMenuItem);
+                all.addMenuItem(deleteMenuItem);
+                all.addMenuItem(saveAsMenuItem);
+                all.addMenuItem(saveAllMenuItem);
+                all.addMenuItem(deleteLastChangeMenuItem);
+                all.addMenuItem(deleteAllMenuItem);
+
+                // Вызов операции на компоновщике
+                all.execute();
+
                 break;
             case 2:
                 contextMenu.setState(new CollapsedState());

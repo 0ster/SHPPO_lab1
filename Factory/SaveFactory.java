@@ -2,24 +2,23 @@ package Factory;
 
 import SubMenu.*;
 
-import javax.xml.namespace.QName;
-
+import java.util.ArrayList;
+import java.util.List;
 public class SaveFactory extends MenuFactory {
     @Override
-    public MenuItemAction createMenuItem() {
+    public List<MenuItemAction> createMenuItem() {
+        List<MenuItemAction> menuItemActions = new ArrayList<>();
+
         SaveAllStrategy saveAllStrategy = new SaveAllStrategy();
         SaveAsStrategy saveAsStrategy = new SaveAsStrategy();
+
         saveAllStrategy.setName("Сохранить все");
         saveAsStrategy.setName("Сохранить как");
-        String name1 = saveAsStrategy.getName();
-        System.out.println(name1);
-        String name2 = saveAllStrategy.getName();
-        System.out.println(name2);
 
-        CompositeMenuItem saveMenu = new CompositeMenuItem();
-        saveMenu.addMenuItem(saveAllStrategy);
-        saveMenu.addMenuItem(saveAsStrategy);
-        return saveMenu;
+        menuItemActions.add(saveAllStrategy);
+        menuItemActions.add(saveAsStrategy);
+
+        return menuItemActions;
     }
 
 }

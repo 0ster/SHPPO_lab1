@@ -8,6 +8,13 @@ import java.util.List;
 public class CompositeMenuItem implements MenuItemAction {
     private List<MenuItemAction> menuItems = new ArrayList<>();
 
+    public CompositeMenuItem(List<MenuItemAction> menuItems) {
+        this.menuItems = menuItems;
+    }
+
+    public CompositeMenuItem() {
+    }
+
     public void addMenuItem(MenuItemAction menuItem) {
         menuItems.add(menuItem);
     }
