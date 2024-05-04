@@ -1,6 +1,8 @@
+package State;
+
 import SubMenu.MenuItemAction;
 
-public class ExpandedState implements MenuState{
+public class ExpandedState implements MenuState {
 
     @Override
     public void stateHandle() {

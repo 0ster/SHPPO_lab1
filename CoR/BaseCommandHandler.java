@@ -10,4 +10,7 @@ abstract class BaseCommandHandler implements CommandHandler {
 
     @Override
     public abstract void handleCoR(String command);
+
+
+
 }

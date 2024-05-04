@@ -1,6 +1,8 @@
+package State;
+
 import SubMenu.MenuItemAction;
 
-public class CollapsedState implements MenuState{
+public class CollapsedState implements MenuState {
 
     @Override
     public void stateHandle() {

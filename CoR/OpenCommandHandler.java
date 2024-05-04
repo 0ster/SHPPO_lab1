@@ -13,4 +13,11 @@ public class OpenCommandHandler extends BaseCommandHandler{
             System.out.println("Команда не поддерживается");
         }
     }
+
+    @Override
+    public String toString() {
+        return "OpenCommandHandler{" +
+                "nextHandler=" + nextHandler +
+                '}';
+    }
 }

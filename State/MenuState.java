@@ -1,3 +1,5 @@
+package State;
+
 import SubMenu.MenuItemAction;
 
 public interface MenuState {

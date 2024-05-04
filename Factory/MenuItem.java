@@ -14,4 +14,11 @@ public class MenuItem implements MenuItemAction {
     public void execute() {
         commandHandler.handleCoR("commandHandler");
     }
+
+    @Override
+    public String toString() {
+        return "MenuItem{" +
+                "commandHandler=" + commandHandler +
+                '}';
+    }
 }

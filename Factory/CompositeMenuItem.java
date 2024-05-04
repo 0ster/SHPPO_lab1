@@ -35,4 +35,10 @@ public class CompositeMenuItem implements MenuItemAction {
         this.menuItems = menuItems;
     }
 
+    @Override
+    public String toString() {
+        return "CompositeMenuItem{" +
+                "menuItems=" + menuItems +
+                '}';
+    }
 }
