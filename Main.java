@@ -14,11 +14,11 @@ public class Main {
         System.out.println("кнопочка 2) развернуто");
 
         Scanner input = new Scanner(System.in);
-        int KnopochkaState = input.nextInt();
+        int knopochkaState = input.nextInt();
 
         ContextMenu contextMenu = new ContextMenu();
 
-        switch (KnopochkaState) {
+        switch (knopochkaState) {
             case 1:
                 // Установка состояния "развернуто"
                 contextMenu.setState(new ExpandedState());
@@ -44,6 +44,15 @@ public class Main {
                 CommandHandler deleteLastChange = new DeleteLastChangeCommandHandler();
                 CommandHandler deleteAll = new DeleteAllCommandHandler();
 
+                menuRoot.handleCoR("Root");
+                openHandler.handleCoR("open");
+                saveHandler.handleCoR("save");
+                saveAs.handleCoR("saveAs");
+                saveAll.handleCoR("saveAll");
+                deleteHandler.handleCoR("delete");
+                deleteLastChange.handleCoR("deleteLastChange");
+                deleteAll.handleCoR("deleteAll");
+
                 // Настройка цепочки обработчиков команд
                 menuRoot.setNext(openHandler);
                 openHandler.setNext(saveHandler);
@@ -63,14 +72,28 @@ public class Main {
                 MenuItemAction deleteLastChangeMenuItem = new MenuItem(deleteLastChange);
                 MenuItemAction deleteAllMenuItem = new MenuItem(deleteAll);
 
-                // Нажатие на элементы меню
-                contextMenu.clickMenuItem(openItems);
+                System.out.println("Выберете элемент меню"); // Для состояния
 
-                contextMenu.clickMenuItem(saveItems);
+                Scanner in = new Scanner(System.in);
+                String item = in.nextLine();
 
-                contextMenu.clickMenuItem(deleteItems);
-
-                // Создание составного элемента меню
+                switch (item) {
+                    case "open":
+                        contextMenu.clickMenuItem(openItems);
+                        break;
+                    case "save":
+                        contextMenu.clickMenuItem(saveItems);
+                        break;
+                    case "delete":
+                        contextMenu.clickMenuItem(deleteItems);
+                        break;
+                    // Добавьте остальные кейсы для других команд меню
+                    default:
+                        System.out.println("Неподдерживаемая команда меню: " + item);
+                        break;
+                }
+//                menuRoot.handleCoR("saveAs");
+                // Создание составного элемента меню1
 
                 CompositeMenuItem all = new CompositeMenuItem();
                 List<MenuItemAction> menuItems = new ArrayList<>();
@@ -83,18 +106,11 @@ public class Main {
                 menuItems.add(deleteLastChangeMenuItem);
                 menuItems.add(deleteAllMenuItem);
 
-                all.setMenuItems(menuItems);
                 all.execute();
-                System.out.println(all);
+                all.setMenuItems(menuItems);
 
-                menuRoot.handleCoR("Root");
-                openHandler.handleCoR("open");
-                saveHandler.handleCoR("save");
-                deleteHandler.handleCoR("delete");
-                saveAs.handleCoR("saveAs");
-                saveAll.handleCoR("saveAll");
-                deleteLastChange.handleCoR("deleteLastChange");
-                deleteAll.handleCoR("deleteAll");
+//                System.out.println(all);
+
 
                 break;
             case 2:
