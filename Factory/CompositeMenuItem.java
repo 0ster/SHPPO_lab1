@@ -1,44 +1,31 @@
 package Factory;
 
 import SubMenu.MenuItemAction;
-
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompositeMenuItem implements MenuItemAction {
-    private List<MenuItemAction> menuItems = new ArrayList<>();
+public class CompositeMenuItem extends MenuFactory {
+    private List<MenuFactory> menuItems = new ArrayList<>();
 
-    public CompositeMenuItem(List<MenuItemAction> menuItems) {
-        this.menuItems = menuItems;
+    public CompositeMenuItem(String name) {
+        super(name);
     }
 
-    public CompositeMenuItem() {
-    }
-
-    public void addMenuItem(MenuItemAction menuItem) {
+    public void addMenuItem(MenuFactory menuItem) {
         menuItems.add(menuItem);
     }
 
+    // Удалить элемент из компоновщика
+    public void remove(MenuFactory menuItem) {
+        menuItems.remove(menuItem);
+    }
+
     @Override
-    public void execute() {
-        // Выполняем все действия вложенных элементов меню
-        for (MenuItemAction menuItem : menuItems) {
-            menuItem.execute();
+    public void display() {
+        for (MenuFactory menuItem : menuItems) {
+            menuItem.display();
         }
     }
 
-    public List<MenuItemAction> getMenuItems() {
-        return menuItems;
-    }
-
-    public void setMenuItems(List<MenuItemAction> menuItems) {
-        this.menuItems = menuItems;
-    }
-
-    @Override
-    public String toString() {
-        return "CompositeMenuItem{" +
-                "menuItems=" + menuItems +
-                '}';
-    }
 }
