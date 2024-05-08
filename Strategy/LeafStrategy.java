@@ -1,4 +1,4 @@
-package SubMenu;
+package Strategy;
 
 public class LeafStrategy implements MenuItemAction {
 

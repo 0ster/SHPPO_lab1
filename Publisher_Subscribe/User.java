@@ -10,6 +10,7 @@ public class User implements Subscriber {
 
     @Override
     public void update(String news) {
+        System.out.println("Спрашиваем у высших сил GPT...Думаем...\n");
         System.out.println(name + " подписался на кнопочку " + news);
     }
 }

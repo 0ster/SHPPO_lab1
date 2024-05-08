@@ -1,6 +1,6 @@
 package State;
 
-import SubMenu.MenuItemAction;
+import Strategy.MenuItemAction;
 
 public class CollapsedState implements MenuState {
 

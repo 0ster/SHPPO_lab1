@@ -1,8 +1,9 @@
 package State;
 
-import SubMenu.MenuItemAction;
+import Strategy.MenuItemAction;
 
 public class ExpandedState implements MenuState {
+    private String name;
 
     @Override
     public void stateHandle() {
@@ -11,6 +12,6 @@ public class ExpandedState implements MenuState {
 
     @Override
     public void clickMenuItem(MenuItemAction menuItem) {
-        menuItem.execute();
+        menuItem.execute(name);
     }
 }

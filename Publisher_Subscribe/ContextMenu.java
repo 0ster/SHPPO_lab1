@@ -1,10 +1,8 @@
 package Publisher_Subscribe;
 
-import Factory.LeafFactory;
 import State.MenuState;
-import SubMenu.MenuItemAction;
+import Strategy.MenuItemAction;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +11,11 @@ public class ContextMenu implements Publisher {
     private List<Subscriber> subscribers = new ArrayList<>();
     private MenuItemAction leafStrategy;
     private MenuState state;
+    private String newsSub;
 
-    public void setLeafStrategy(MenuItemAction leafStrategy) {
-        this.leafStrategy = leafStrategy;
+    public void setLeafStrategy(String news) {
+        this.newsSub = news;
+        notifySubscribers();
     }
 
     public void displayItem(String name) {
@@ -34,10 +34,9 @@ public class ContextMenu implements Publisher {
     }
 
     @Override
-    public void notifySubscribers(String message) {
-        for (Subscriber subscriber : subscribers) {
-            subscriber.update(message);
-        }
+    public void notifySubscribers() {
+        for (Subscriber o : subscribers)
+            o.update(newsSub);
     }
 
     public ContextMenu() {}
