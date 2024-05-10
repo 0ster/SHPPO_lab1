@@ -1,5 +1,7 @@
 package Publisher_Subscribe;
 
+import Factory_SingleTon_Composite.MenuItem;
+
 public class User implements Subscriber {
     private String name;
 
@@ -9,8 +11,9 @@ public class User implements Subscriber {
     }
 
     @Override
-    public void update(String news) {
-        System.out.println("Спрашиваем у высших сил GPT...Думаем...\n");
-        System.out.println(name + " подписался на кнопочку " + news);
+    public void update(MenuItem item) {
+        if (item != null) {
+            item.display();}
+//        System.out.println(name + " подписался на кнопочку " + item.getName());
     }
 }

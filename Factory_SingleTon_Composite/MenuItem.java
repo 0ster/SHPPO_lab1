@@ -1,5 +1,7 @@
 package Factory_SingleTon_Composite;
 
+import Publisher_Subscribe.ContextMenu;
+
 public abstract class MenuItem {
     private String name;
 
@@ -13,4 +15,5 @@ public abstract class MenuItem {
 
     public abstract void display();
 
+    public abstract void select(ContextMenu publisher);
 }

@@ -1,5 +1,6 @@
 package Publisher_Subscribe;
 
+import Factory_SingleTon_Composite.MenuItem;
 import State.MenuState;
 import Strategy.MenuItemAction;
 
@@ -13,9 +14,9 @@ public class ContextMenu implements Publisher {
     private MenuState state;
     private String newsSub;
 
-    public void setLeafStrategy(String news) {
+    public void setLeafStrategy(String news, MenuItem item) {
         this.newsSub = news;
-        notifySubscribers();
+        notifySubscribers(item);
     }
 
     public void displayItem(String name) {
@@ -34,9 +35,9 @@ public class ContextMenu implements Publisher {
     }
 
     @Override
-    public void notifySubscribers() {
+    public void notifySubscribers(MenuItem item) {
         for (Subscriber o : subscribers)
-            o.update(newsSub);
+            o.update(item);
     }
 
     public ContextMenu() {}
