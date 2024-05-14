@@ -2,42 +2,49 @@ package Publisher_Subscribe;
 
 import Factory_SingleTon_Composite.MenuItem;
 import State.MenuState;
-import Strategy.MenuItemAction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ContextMenu implements Publisher {
 
-    private List<Subscriber> subscribers = new ArrayList<>();
-    private MenuItemAction leafStrategy;
+    private Map<MenuItem, List<Subscriber>> subscriptions = new HashMap<>();
     private MenuState state;
-    private String newsSub;
 
-    public void setLeafStrategy(String news, MenuItem item) {
-        this.newsSub = news;
-        notifySubscribers(item);
-    }
-
-    public void displayItem(String name) {
-        leafStrategy.execute(name);
-    }
 
     @Override
-    public void subscribe(Subscriber subscriber) {
+    public void subscribe(Subscriber subscriber, MenuItem menuItem) {
+        List<Subscriber> subscribers = subscriptions.getOrDefault(menuItem, new ArrayList<>());
         subscribers.add(subscriber);
-
+        subscriptions.put(menuItem, subscribers);
+        // Уведомляем подписчика сразу после подписки
+        subscriber.update(menuItem);
     }
 
     @Override
-    public void unsubscribe(Subscriber subscriber) {
-        subscribers.remove(subscriber);
+    public void unsubscribe(Subscriber subscriber, MenuItem menuItem) {
+        List<Subscriber> subscribers = subscriptions.get(menuItem);
+        if (subscribers != null) {
+            subscribers.remove(subscriber);
+            if (subscribers.isEmpty()) {
+                subscriptions.remove(menuItem);
+            }
+            if (subscriber instanceof User) {
+                ((User) subscriber).removeSubscribedItem(menuItem);
+            }
+        }
     }
 
     @Override
-    public void notifySubscribers(MenuItem item) {
-        for (Subscriber o : subscribers)
-            o.update(item);
+    public void notifySubscribers(MenuItem menuItem) {
+        List<Subscriber> subscribers = subscriptions.get(menuItem);
+        if (subscribers != null) {
+            for (Subscriber subscriber : subscribers) {
+                subscriber.update(menuItem);
+            }
+        }
     }
 
     public ContextMenu() {}
@@ -56,10 +63,4 @@ public class ContextMenu implements Publisher {
 
     public void handle() {state.stateHandle();}
 
-    public void clickMenuItem(List<MenuItemAction> menuItems) {
-        for (MenuItemAction menuItem : menuItems) {
-            state.clickMenuItem(menuItem);
-        }
-    }
-
-} // Полностью переписать это (пи)
+}

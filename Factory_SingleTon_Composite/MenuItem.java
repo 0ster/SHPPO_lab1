@@ -16,4 +16,8 @@ public abstract class MenuItem {
     public abstract void display();
 
     public abstract void select(ContextMenu publisher);
+
+    public abstract void addChild(MenuItem menuItem);
+
+    public abstract void removeChild(MenuItem menuItem);
 }

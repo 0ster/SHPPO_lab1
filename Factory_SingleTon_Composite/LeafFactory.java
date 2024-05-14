@@ -1,7 +1,6 @@
 package Factory_SingleTon_Composite;
 
 public class LeafFactory extends MenuItemFactory {
-    private String name;
     private static LeafFactory instance;
 
     private LeafFactory(String name) {

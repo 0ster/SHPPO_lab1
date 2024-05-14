@@ -2,18 +2,38 @@ package Publisher_Subscribe;
 
 import Factory_SingleTon_Composite.MenuItem;
 
-public class User implements Subscriber {
-    private String name;
+import java.util.ArrayList;
+import java.util.List;
+import Strategy.MenuItemAction;
 
-    public User(String name, Publisher publisher) {
-        this.name = name;
-        publisher.subscribe(this);
-    }
+public class User implements Subscriber {
+    private List<MenuItem> subscribedItems = new ArrayList<>();
+    private MenuItemAction strategy;
 
     @Override
     public void update(MenuItem item) {
-        if (item != null) {
-            item.display();}
-//        System.out.println(name + " подписался на кнопочку " + item.getName());
+        System.out.println("Подписчик: Получено обновление для " + item.getName());
+        subscribedItems.add(item);
+        if (strategy != null) {
+            strategy.execute(item.getName());
+        }
+    }
+
+    @Override
+    public void displaySubscribedItems() {
+        System.out.println("Элементы подписки: ");
+        for (MenuItem item : subscribedItems) {
+            System.out.println("- " + item.getName());
+        }
+    }
+
+    @Override
+    public void removeSubscribedItem(MenuItem item) {
+        subscribedItems.remove(item);
+    }
+
+    @Override
+    public void setStrategy(MenuItemAction strategy) {
+        this.strategy = strategy;
     }
 }

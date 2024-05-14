@@ -1,25 +1,26 @@
 package Strategy;
+import Factory_SingleTon_Composite.MenuItem;
 
 public class LeafStrategy implements MenuItemAction {
 
-    private String Name;
+    private String name;
 
     public LeafStrategy() {
-        Name = " ";
+        name = " ";
     }
     public LeafStrategy(String name) {
-        Name = name;
+        this.name = name;
     }
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
     public String getName() {
-        return Name;
+        return name;
     }
 
     @Override
     public void execute(String name) {
-        System.out.println("Выполняется " + name);
+        System.out.println("Выполняется: " + name);
     }
 
 }

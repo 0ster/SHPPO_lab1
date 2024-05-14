@@ -1,6 +1,7 @@
 package Factory_SingleTon_Composite;
 
 import Publisher_Subscribe.ContextMenu;
+import Strategy.LeafStrategy;
 
 public class Leaf extends MenuItem {
 
@@ -15,8 +16,21 @@ public class Leaf extends MenuItem {
 
     @Override
     public void select(ContextMenu publisher) {
-        // Уведомляем подписчиков о выборе элемента
-        publisher.notifySubscribers(null);
+        publisher.notifySubscribers(this);
+        LeafStrategy leaf = new LeafStrategy();
+        leaf.execute(this.getName());
+    }
+
+    @Override
+    public void addChild(MenuItem menuItem) {
+
+        System.out.println("Невозможно добавить дочерний элемент.");
+    }
+
+    @Override
+    public void removeChild(MenuItem menuItem) {
+
+        System.out.println("Невозможно удалить дочерний элемент.");
     }
 }
 
