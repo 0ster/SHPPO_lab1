@@ -1,21 +1,25 @@
 package Publisher_Subscribe;
 
 import Factory_SingleTon_Composite.MenuItem;
+import Strategy.LeafStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
-import Strategy.MenuItemAction;
 
 public class User implements Subscriber {
     private List<MenuItem> subscribedItems = new ArrayList<>();
-    private MenuItemAction strategy;
+    private LeafStrategy strategy = new LeafStrategy();
 
     @Override
     public void update(MenuItem item) {
         System.out.println("Подписчик: Получено обновление для " + item.getName());
         subscribedItems.add(item);
-        if (strategy != null) {
-            strategy.execute(item.getName());
+    }
+
+    public void updateSubscribedItem() {
+        List<MenuItem> itemsToExecute = new ArrayList<>(subscribedItems);
+        for (MenuItem item : itemsToExecute) {
+            strategy.execute(item.getName()); // Call the execute method from LeafStrategy
         }
     }
 
@@ -33,7 +37,11 @@ public class User implements Subscriber {
     }
 
     @Override
-    public void setStrategy(MenuItemAction strategy) {
+    public void setStrategy(LeafStrategy strategy) {
         this.strategy = strategy;
+    }
+
+    public List<MenuItem> getSubscribedItems() {
+        return subscribedItems;
     }
 }

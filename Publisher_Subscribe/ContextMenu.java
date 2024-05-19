@@ -42,7 +42,7 @@ public class ContextMenu implements Publisher {
         List<Subscriber> subscribers = subscriptions.get(menuItem);
         if (subscribers != null) {
             for (Subscriber subscriber : subscribers) {
-                subscriber.update(menuItem);
+                subscriber.updateSubscribedItem();
             }
         }
     }

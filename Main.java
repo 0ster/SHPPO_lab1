@@ -8,12 +8,6 @@ import State.*;
 import Strategy.LeafStrategy;
 import java.util.Scanner;
 
-//////////////////////////////////////______________________________________
-//...1)....НАПИСАТЬ РЕВЕРСИВНУЮ ПРОХОДКУ ПО ДЕРЕВУ, НАДЕЮСЬ НЕ ЗАБУДЕМ.....2
-//...2)......НАПИСАТЬ ВЗАИМОЗАМЕНЯЕМУЮ ФУНКЦИЮ ПОДПИСКИ/ОТПИСКИ............4
-//...3)..........ДОБАВЛЕНИЕ УДАЛЕНИЕ ЭЛЕМЕНТОВ + БАЗОВАЯ МОДЕЛЬ............3
-//...4).............СПИСОК ДЛЯ ВЫВОДА ЭЛЕМЕНТОВ С ПОДПИСКОЙ................5
-//////////////////////////////////////______________________________________
 
 public class Main {
     public static void main(String[] args) {
@@ -66,7 +60,8 @@ public class Main {
                     System.out.println("3. Показать подписанные пункты");
                     System.out.println("4. Добавить новый пункт в меню");
                     System.out.println("5. Удалить пункт из меню");
-                    System.out.println("6. Выйти");
+                    System.out.println("6. Активировать все подписанные пункты");
+                    System.out.println("7. Выйти");
 
                     int choice = scanner.nextInt();
                     scanner.nextLine();
@@ -78,7 +73,6 @@ public class Main {
                             LeafStrategy itemAction = new LeafStrategy();
                             if (subscribeItem != null) {
                                 contextMenu.subscribe(user, subscribeItem);
-                                itemAction.execute(subscribeItemName);
                                 System.out.println("Подписка на пункт " + subscribeItemName + " выполнена.");
                             } else {
                                 System.out.println("Пункт меню не найден.");
@@ -159,6 +153,9 @@ public class Main {
                             menu.display();
                             break;
                         case 6:
+                            user.updateSubscribedItem();
+                            break;
+                        case 7:
                             running = false;
                             break;
                         default:
