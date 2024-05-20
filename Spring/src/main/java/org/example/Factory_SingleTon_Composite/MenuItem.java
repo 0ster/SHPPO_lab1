@@ -1,6 +1,6 @@
-package Factory_SingleTon_Composite;
+package org.example.Factory_SingleTon_Composite;
 
-import Publisher_Subscribe.ContextMenu;
+import org.example.Publisher_Subscribe.ContextMenu;
 
 public abstract class MenuItem {
     private String name;

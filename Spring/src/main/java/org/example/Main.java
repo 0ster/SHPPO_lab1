@@ -1,11 +1,12 @@
+package org.example;
 
-import Factory_SingleTon_Composite.CompositeMenuItem;
-import Factory_SingleTon_Composite.LeafFactory;
-import Factory_SingleTon_Composite.MenuItem;
-import Publisher_Subscribe.ContextMenu;
-import Publisher_Subscribe.User;
-import State.*;
-import Strategy.LeafStrategy;
+import org.example.Factory_SingleTon_Composite.CompositeMenuItem;
+import org.example.Factory_SingleTon_Composite.LeafFactory;
+import org.example.Factory_SingleTon_Composite.MenuItem;
+import org.example.Publisher_Subscribe.ContextMenu;
+import org.example.Publisher_Subscribe.User;
+import org.example.State.*;
+import org.example.Strategy.LeafStrategy;
 import java.util.Scanner;
 
 

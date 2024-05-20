@@ -1,4 +1,4 @@
-package State;
+package org.example.State;
 
 public class ExpandedState implements MenuState {
     private String name;

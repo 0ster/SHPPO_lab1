@@ -1,4 +1,4 @@
-package Factory_SingleTon_Composite;
+package org.example.Factory_SingleTon_Composite;
 
 abstract class MenuItemFactory {
     private String name;

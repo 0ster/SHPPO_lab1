@@ -1,4 +1,4 @@
-package Factory_SingleTon_Composite;
+package org.example.Factory_SingleTon_Composite;
 
 public class LeafFactory extends MenuItemFactory {
     private static LeafFactory instance;

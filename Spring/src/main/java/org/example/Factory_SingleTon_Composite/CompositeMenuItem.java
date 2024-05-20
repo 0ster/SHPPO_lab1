@@ -1,6 +1,6 @@
-package Factory_SingleTon_Composite;
+package org.example.Factory_SingleTon_Composite;
 
-import Publisher_Subscribe.ContextMenu;
+import org.example.Publisher_Subscribe.ContextMenu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

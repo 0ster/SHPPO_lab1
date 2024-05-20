@@ -1,5 +1,4 @@
-package Strategy;
-import Factory_SingleTon_Composite.MenuItem;
+package org.example.Strategy;
 
 public class LeafStrategy implements MenuItemAction {
 

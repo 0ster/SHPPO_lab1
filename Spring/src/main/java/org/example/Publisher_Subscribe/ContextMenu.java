@@ -1,7 +1,7 @@
-package Publisher_Subscribe;
+package org.example.Publisher_Subscribe;
 
-import Factory_SingleTon_Composite.MenuItem;
-import State.MenuState;
+import org.example.Factory_SingleTon_Composite.MenuItem;
+import org.example.State.MenuState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
