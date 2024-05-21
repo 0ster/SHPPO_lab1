@@ -14,4 +14,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- Spring Core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.23</version> <!-- Убедитесь, что версия актуальна -->
+        </dependency>
+        <!-- Если нужны другие модули Spring, добавьте их сюда -->
+    </dependencies>
 </project>

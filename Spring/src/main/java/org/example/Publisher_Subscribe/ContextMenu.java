@@ -13,6 +13,24 @@ public class ContextMenu implements Publisher {
     private Map<MenuItem, List<Subscriber>> subscriptions = new HashMap<>();
     private MenuState state;
 
+    public ContextMenu() {
+    }
+
+    public ContextMenu(MenuState state) {
+        this.state = state;
+    }
+
+    public void setState(MenuState state) {
+        this.state = state;
+    }
+
+    public MenuState getState() {
+        return state;
+    }
+
+    public void handle() {
+        state.stateHandle();
+    }
 
     @Override
     public void subscribe(Subscriber subscriber, MenuItem menuItem) {
@@ -46,21 +64,5 @@ public class ContextMenu implements Publisher {
             }
         }
     }
-
-    public ContextMenu() {}
-
-    public ContextMenu(MenuState state) {
-        this.state = state;
-    }
-
-    public void setState(MenuState state) {
-        this.state = state;
-    }
-
-    public MenuState getState() {
-        return state;
-    }
-
-    public void handle() {state.stateHandle();}
-
 }
+

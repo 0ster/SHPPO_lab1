@@ -1,0 +1,28 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Определение бинов -->
+    <bean id="leafFactory" class="org.example.Factory_SingleTon_Composite.LeafFactory" factory-method="getInstance">
+        <constructor-arg value="Фабрика 1" />
+    </bean>
+
+    <bean id="compositeMenuItem" class="org.example.Factory_SingleTon_Composite.CompositeMenuItem">
+        <constructor-arg value="Menu" />
+    </bean>
+
+    <!-- Define beans for Publisher_Subscribe package -->
+    <bean id="contextMenu" class="org.example.Publisher_Subscribe.ContextMenu">
+        <property name="state" ref="expandedState"/>
+    </bean>
+
+    <bean id="user" class="org.example.Publisher_Subscribe.User" />
+
+    <bean id="expandedState" class="org.example.State.ExpandedState" />
+    <bean id="collapsedState" class="org.example.State.CollapsedState" />
+    <!-- Define beans for Strategy package -->
+    <bean id="leafStrategy" class="org.example.Strategy.LeafStrategy" />
+
+</beans>

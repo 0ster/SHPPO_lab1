@@ -9,9 +9,17 @@ import org.example.State.*;
 import org.example.Strategy.LeafStrategy;
 import java.util.Scanner;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
     public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ContextMenu contextMenu = context.getBean("contextMenu", ContextMenu.class);
+        User user = context.getBean("user", User.class);
+        LeafFactory factory = context.getBean("leafFactory", LeafFactory.class);
+        CompositeMenuItem primalRoot = context.getBean("compositeMenuItem", CompositeMenuItem.class);
+
         System.out.println("Выберете развернуть/свернуть");
         System.out.println("    1) развернуть");
         System.out.println("    2) свернуть");
@@ -19,23 +27,16 @@ public class Main {
         Scanner input = new Scanner(System.in);
         int stateButton = input.nextInt();
 
-        ContextMenu contextMenu = new ContextMenu();
-
         switch (stateButton) {
             case 1:
-                contextMenu.setState(new ExpandedState());
+                contextMenu.setState(context.getBean("expandedState", ExpandedState.class));
                 contextMenu.handle();
-
-                User user = new User();
-
-                LeafFactory factory = LeafFactory.getInstance("Фабрика 1");
 
                 MenuItem item2 = factory.createMenuItem("2");
                 MenuItem item3 = factory.createMenuItem("3");
                 MenuItem item5 = factory.createMenuItem("5");
                 MenuItem item6 = factory.createMenuItem("6");
 
-                CompositeMenuItem primalRoot = new CompositeMenuItem("Первоначальный корень");
                 CompositeMenuItem menu = new CompositeMenuItem("Menu");
                 CompositeMenuItem item1 = new CompositeMenuItem("1");
                 CompositeMenuItem item4 = new CompositeMenuItem("4");
@@ -167,7 +168,7 @@ public class Main {
 
                 break;
             case 2:
-                contextMenu.setState(new CollapsedState());
+                contextMenu.setState(context.getBean("collapsedState", CollapsedState.class));
                 contextMenu.handle();
                 break;
         }
