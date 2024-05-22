@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ContextMenu implements Publisher {
+public class ContextMenu implements IContextMenu {
 
     private Map<MenuItem, List<Subscriber>> subscriptions = new HashMap<>();
     private MenuState state;

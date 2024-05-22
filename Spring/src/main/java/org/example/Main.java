@@ -1,10 +1,7 @@
 package org.example;
 
-import org.example.Factory_SingleTon_Composite.CompositeMenuItem;
-import org.example.Factory_SingleTon_Composite.LeafFactory;
-import org.example.Factory_SingleTon_Composite.MenuItem;
-import org.example.Publisher_Subscribe.ContextMenu;
-import org.example.Publisher_Subscribe.User;
+import org.example.Factory_SingleTon_Composite.*;
+import org.example.Publisher_Subscribe.*;
 import org.example.State.*;
 import org.example.Strategy.LeafStrategy;
 import java.util.Scanner;
@@ -15,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        ContextMenu contextMenu = context.getBean("contextMenu", ContextMenu.class);
+        IContextMenu contextMenu = context.getBean("contextMenu", IContextMenu.class);
         User user = context.getBean("user", User.class);
         LeafFactory factory = context.getBean("leafFactory", LeafFactory.class);
         CompositeMenuItem primalRoot = context.getBean("compositeMenuItem", CompositeMenuItem.class);
