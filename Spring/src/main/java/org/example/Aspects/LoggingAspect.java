@@ -22,7 +22,7 @@ public class LoggingAspect {
 
     @AfterReturning("execution(* org.example.Publisher_Subscribe.ContextMenu.subscribe(..))")
     public void afterReturningSubscribeAdvice() {
-        System.out.println("After successfully subscribing");
+        System.out.println("После успешного выполнения метода subscribe");
     }
 
     @Before("execution(* org.example.Publisher_Subscribe.ContextMenu.unsubscribe(..))")
@@ -37,7 +37,7 @@ public class LoggingAspect {
 
     @AfterReturning("execution(* org.example.Publisher_Subscribe.ContextMenu.unsubscribe(..))")
     public void afterReturningUnsubscribeAdvice() {
-        System.out.println("After successfully unsubscribing");
+        System.out.println("После успешного выполнения метода unsubscribe");
     }
 
     @Before("execution(* org.example.Factory_SingleTon_Composite.CompositeMenuItem.addChild(..))")
@@ -50,6 +50,11 @@ public class LoggingAspect {
         System.out.println("После выполнения метода addChild");
     }
 
+    @AfterReturning("execution(* org.example.Factory_SingleTon_Composite.CompositeMenuItem.addChild(..))")
+    public void afterReturningAddChild() {
+        System.out.println("После выполнения метода addChild");
+    }
+
     @Before("execution(* org.example.Factory_SingleTon_Composite.CompositeMenuItem.removeChild(..))")
     public void logBeforeRemoveChild() {
         System.out.println("Перед выполнением метода removeChild");
@@ -57,6 +62,11 @@ public class LoggingAspect {
 
     @After("execution(* org.example.Factory_SingleTon_Composite.CompositeMenuItem.removeChild(..))")
     public void logAfterRemoveChild() {
+        System.out.println("После выполнения метода removeChild");
+    }
+
+    @AfterReturning("execution(* org.example.Factory_SingleTon_Composite.CompositeMenuItem.addChild(..))")
+    public void afterReturningRemoveChild() {
         System.out.println("После выполнения метода removeChild");
     }
 
@@ -72,8 +82,9 @@ public class LoggingAspect {
 
     @AfterReturning("execution(* org.example.Publisher_Subscribe.ContextMenu.notifySubscribers(..))")
     public void afterReturningNotifySubscribersAdvice() {
-        System.out.println("After successfully notifying subscribers");
+        System.out.println("После успешного выполнения метода notifySubscribers");
     }
+
     @Before("execution(* org.example.Publisher_Subscribe.ContextMenu.setState(..))")
     public void logBeforeSetState() {
         System.out.println("Перед выполнением метода setState");
@@ -86,6 +97,6 @@ public class LoggingAspect {
 
     @AfterReturning("execution(* org.example.Publisher_Subscribe.ContextMenu.setState(..))")
     public void afterReturningSetStateAdvice() {
-        System.out.println("After successfully setting state");
+        System.out.println("После успешного выполнения метода setState");
     }
 }

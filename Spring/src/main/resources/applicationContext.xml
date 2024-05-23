@@ -7,7 +7,6 @@
 
     <aop:aspectj-autoproxy/>
 
-    <!-- Определение бинов -->
     <bean id="leafFactory" class="org.example.Factory_SingleTon_Composite.LeafFactory" factory-method="getInstance">
         <constructor-arg value="Фабрика 1" />
     </bean>
