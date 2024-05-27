@@ -12,7 +12,7 @@
     </bean>
 
     <bean id="compositeMenuItem" class="org.example.Factory_SingleTon_Composite.CompositeMenuItem">
-        <constructor-arg value="Menu" />
+        <constructor-arg value="Root" />
     </bean>
 
     <bean id="contextMenu" class="org.example.Publisher_Subscribe.ContextMenu">

@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -50,6 +51,16 @@ public class Main {
 
                 menu.display();
 
+//                Producer producer = new Producer(primalRoot, factory);
+//                Consumer consumer = new Consumer(primalRoot);
+////
+//                Thread producerThread = new Thread(producer);
+//                Thread consumerThread = new Thread(consumer);
+//
+////                producerThread.start();
+////                consumerThread.start();
+                Thread producerThread = null;
+                Thread consumerThread = null;
                 Scanner scanner = new Scanner(System.in);
                 boolean running = true;
                 while (running) {
@@ -69,7 +80,6 @@ public class Main {
                             System.out.println("Введите название пункта меню для подписки:");
                             String subscribeItemName = scanner.nextLine();
                             MenuItem subscribeItem = primalRoot.findMenuItem(subscribeItemName);
-                            LeafStrategy itemAction = new LeafStrategy();
                             if (subscribeItem != null) {
                                 contextMenu.subscribe(user, subscribeItem);
                                 System.out.println("Подписка на пункт " + subscribeItemName + " выполнена.");
@@ -92,47 +102,16 @@ public class Main {
                             user.displaySubscribedItems();
                             break;
                         case 4:
-                            System.out.println("Введите название родительского элемента:");
-                            String parentName = scanner.next();
+                            System.out.println("Производитель добавляет новый элемент в очередь.");
+                            Producer producer = new Producer(primalRoot, factory);
+                            Consumer consumer = new Consumer(primalRoot);
 
-                            MenuItem addParentItem = primalRoot.findMenuItem(parentName);
+                            producerThread = new Thread(producer);
+                            consumerThread = new Thread(consumer);
 
-                            if (addParentItem != null) {
+                            producerThread.start();
+                            consumerThread.start();
 
-                                System.out.println("Выбери тип нового элемента \n 1)Root \n 2)Leaf");
-                                Scanner inty = new Scanner(System.in);
-                                int type = inty.nextInt();
-
-                                switch (type){
-                                   case 1:
-                                       System.out.println("Введите название нового элемента:");
-                                       String newItemName1 = scanner.next();
-
-                                       LeafFactory newLeaf = LeafFactory.getInstance(newItemName1);
-                                       CompositeMenuItem newItem = new CompositeMenuItem(newItemName1);
-
-                                       addParentItem.addChild(newItem);
-                                       System.out.println("Добавлен " + newItemName1 + " в " + parentName);
-
-                                       menu.display();
-                                       break;
-                                   case 2:
-                                       System.out.println("Введите название нового элемента:");
-                                       String newItemName2 = scanner.next();
-
-                                       LeafFactory newLeaf1 = LeafFactory.getInstance(newItemName2);
-                                       MenuItem newItem1 = factory.createMenuItem(newItemName2);
-
-                                       addParentItem.addChild(newItem1);
-                                       System.out.println("Добавлен " + newItemName2 + " в " + parentName);
-
-                                       menu.display();
-                                       break;
-                               }
-                            }
-                            else {
-                                System.out.println("Родительский элемент не найден.");
-                            }
                             break;
                         case 5:
                             System.out.println("Введите название родительского элемента:");
@@ -141,7 +120,6 @@ public class Main {
                             MenuItem parentItem = menu.findMenuItem(deleteParentName);
 
                             if (parentItem != null) {
-
                                 System.out.println("Введите название дочернего элемента, который требуется удалить:");
                                 String childName = scanner.next();
 
@@ -156,6 +134,12 @@ public class Main {
                             break;
                         case 7:
                             running = false;
+                            if (producerThread != null) {
+                                producerThread.interrupt();
+                            }
+                            if (consumerThread != null) {
+                                consumerThread.interrupt();
+                            }
                             break;
                         default:
                             System.out.println("Invalid choice");
@@ -171,4 +155,5 @@ public class Main {
         }
     }
 }
+
 
