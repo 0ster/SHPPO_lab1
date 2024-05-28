@@ -4,54 +4,67 @@ import org.example.Factory_SingleTon_Composite.CompositeMenuItem;
 import org.example.Factory_SingleTon_Composite.LeafFactory;
 import org.example.Factory_SingleTon_Composite.MenuItem;
 
-import java.util.Scanner;
+import java.util.concurrent.BlockingQueue;
 
 public class Producer implements Runnable {
     private CompositeMenuItem root;
     private LeafFactory factory;
+    private BlockingQueue<String> queue;
 
-    public Producer(CompositeMenuItem root, LeafFactory factory) {
+    public Producer(CompositeMenuItem root, LeafFactory factory, BlockingQueue<String> queue) {
         this.root = root;
         this.factory = factory;
+        this.queue = queue;
     }
 
     @Override
     public void run() {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            String parentName = scanner.next();
+        try {
+            while (true) {
+                String parentName = queue.take(); // ожидание команды
 
-            MenuItem addParentItem = root.findMenuItem(parentName);
-
-            if (addParentItem != null) {
-                System.out.println("Выбери тип нового элемента \n 1)Root \n 2)Leaf");
-                int type = scanner.nextInt();
-
-                switch (type) {
-                    case 1:
-                        System.out.println("Введите название нового элемента:");
-                        String newItemName1 = scanner.next();
-                        CompositeMenuItem newItem = new CompositeMenuItem(newItemName1);
-                        try {
-                            MenuBuffer.addItem(newItem);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case 2:
-                        System.out.println("Введите название нового элемента:");
-                        String newItemName2 = scanner.next();
-                        MenuItem newItemLeaf = factory.createMenuItem(newItemName2);
-                        try {
-                            MenuBuffer.addItem(newItemLeaf);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        break;
+                if (parentName.equals("EXIT")) {
+                    break;
                 }
-            } else {
-                System.out.println("Родительский элемент не найден.");
+
+                MenuItem addParentItem = findMenuItemRecursive(root, parentName);
+
+                if (addParentItem != null) {
+                    String type = queue.take(); // тип нового элемента
+
+                    switch (type) {
+                        case "1":
+                            String newItemName1 = queue.take();
+                            CompositeMenuItem newItem = new CompositeMenuItem(newItemName1);
+                            addParentItem.addChild(newItem);
+                            break;
+                        case "2":
+                            String newItemName2 = queue.take();
+                            MenuItem newItemLeaf = factory.createMenuItem(newItemName2);
+                            addParentItem.addChild(newItemLeaf);
+                            break;
+                    }
+                } else {
+                    System.out.println("Родительский элемент не найден.");
+                }
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private MenuItem findMenuItemRecursive(MenuItem current, String name) {
+        if (current.getName().equals(name)) {
+            return current;
+        }
+        if (current instanceof CompositeMenuItem) {
+            for (MenuItem item : ((CompositeMenuItem) current).getMenuItems()) {
+                MenuItem found = findMenuItemRecursive(item, name);
+                if (found != null) {
+                    return found;
+                }
             }
         }
+        return null;
     }
 }

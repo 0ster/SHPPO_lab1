@@ -20,10 +20,9 @@ public class Consumer implements Runnable {
                     root.display();
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
+                break;
             }
         }
     }
-
 }
-

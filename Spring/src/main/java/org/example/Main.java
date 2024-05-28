@@ -4,11 +4,13 @@ import org.example.Factory_SingleTon_Composite.*;
 import org.example.Publisher_Subscribe.*;
 import org.example.State.*;
 import org.example.Strategy.LeafStrategy;
+
 import java.util.Scanner;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,16 +53,16 @@ public class Main {
 
                 menu.display();
 
-//                Producer producer = new Producer(primalRoot, factory);
-//                Consumer consumer = new Consumer(primalRoot);
-////
-//                Thread producerThread = new Thread(producer);
-//                Thread consumerThread = new Thread(consumer);
-//
-////                producerThread.start();
-////                consumerThread.start();
-                Thread producerThread = null;
-                Thread consumerThread = null;
+                BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+                Producer producer = new Producer(primalRoot, factory, queue);
+                Consumer consumer = new Consumer(primalRoot);
+
+                Thread producerThread = new Thread(producer);
+                Thread consumerThread = new Thread(consumer);
+
+                producerThread.start();
+                consumerThread.start();
+
                 Scanner scanner = new Scanner(System.in);
                 boolean running = true;
                 while (running) {
@@ -102,26 +104,25 @@ public class Main {
                             user.displaySubscribedItems();
                             break;
                         case 4:
-                            System.out.println("Производитель добавляет новый элемент в очередь.");
-                            Producer producer = new Producer(primalRoot, factory);
-                            Consumer consumer = new Consumer(primalRoot);
+                            System.out.println("Введите название родительского элемента:");
+                            String parentName = scanner.nextLine();
+                            queue.offer(parentName);
 
-                            producerThread = new Thread(producer);
-                            consumerThread = new Thread(consumer);
+                            System.out.println("Выберите тип нового элемента: 1)Root 2)Leaf");
+                            queue.offer(scanner.nextLine());
 
-                            producerThread.start();
-                            consumerThread.start();
-
+                            System.out.println("Введите название нового элемента:");
+                            queue.offer(scanner.nextLine());
+                            menu.display();
                             break;
                         case 5:
                             System.out.println("Введите название родительского элемента:");
-                            String deleteParentName = scanner.next();
-
+                            String deleteParentName = scanner.nextLine();
                             MenuItem parentItem = menu.findMenuItem(deleteParentName);
 
                             if (parentItem != null) {
                                 System.out.println("Введите название дочернего элемента, который требуется удалить:");
-                                String childName = scanner.next();
+                                String childName = scanner.nextLine();
 
                                 primalRoot.removeChild(deleteParentName, childName);
                             } else {
@@ -134,13 +135,15 @@ public class Main {
                             break;
                         case 7:
                             running = false;
-                            if (producerThread != null) {
-                                producerThread.interrupt();
+                            queue.offer("EXIT");
+                            try {
+                                producerThread.join();
+                            } catch (InterruptedException e) {
+                                Thread.currentThread().interrupt();
                             }
-                            if (consumerThread != null) {
-                                consumerThread.interrupt();
-                            }
+                            consumerThread.interrupt();
                             break;
+
                         default:
                             System.out.println("Invalid choice");
                             break;
@@ -155,5 +158,4 @@ public class Main {
         }
     }
 }
-
 
